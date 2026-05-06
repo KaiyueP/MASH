@@ -97,6 +97,12 @@ t_loop0 = None
 # ============================================================
 args = model.read_args()
 
+def announce_tc_setup(args):
+    if args.model == "tc":
+        print("[TC] QD baths are loaded from tc_params_AU.npz; cavity states are phonon-free.")
+
+announce_tc_setup(args)
+
 # RNG seeding per rank (avoid identical streams across MPI ranks)
 base_seed = getattr(args, "seed", None)
 if base_seed is None:

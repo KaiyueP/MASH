@@ -1,4 +1,3 @@
-
 import numpy as np
 import argparse
 import sys
@@ -30,7 +29,7 @@ def read_args():
     parser = CustomArgumentParser(fromfile_prefix_chars=["@","+"])
     # General
     parser.add_argument("-model", type=str, default="spinboson", help="Model system", 
-                        choices=["spinboson","fmo3","fmo7","fmo8","tully1","tully2","lh2","lhc2","lvc","qvc"])
+                        choices=["spinboson","fmo3","fmo7","fmo8","tully1","tully2","lh2","lhc2","lvc","qvc","tc"])
     parser.add_argument("-basis", type=str, default="site", help="Diabatic basis for certain model systems", 
                         choices=["exc","site","adia","dia"])
     parser.add_argument("-units", type=str, default="au",help="""Choose unit system. 
@@ -186,6 +185,9 @@ def setup_model(args):
         ns = Vconst.shape[0]
         nf = omega.shape[0]
         print(f"Generating qvc systems of dimensions {ns}, with bath modes {nf}")
+    
+    elif model == 'tc':
+        Vconst, omega, Vlin, mode_owner, n_qd, nstate_per_qd, n_cavity, ns, nf = setup_tc_model()
 
     elif model=='fmo3':
         ns = 3
@@ -396,11 +398,69 @@ def setup_model(args):
             mashf90.init_frexc(mass,omega,Vconst_renorm,kappa,nf,nf_site,ns)
     elif model in ['spinboson','lvc']:
         mashf90.init_linvib(mass,omega,Vconst,Vlin,nf,ns)
+    elif model == 'tc':
+        # TC hybrid backend uses mode_owner to know whether each mode is
+        # shared across many states (owner=0) or local to one QD block (owner=i).
+        mashf90.init_tchybrid(mass,omega,Vconst,Vlin,mode_owner,nf,ns,n_qd,nstate_per_qd,n_cavity)
     elif model in ['qvc']:
         mashf90.init_qudvib(mass,omega,Vconst,Vlin,Wqud,nf,ns)
     else:
         sys.exit('Model not recognized!')
     return mass,omega,nf,ns
+
+
+def setup_tc_model():
+    """Load TC parameters with QD-local baths and cavity states without phonon coupling."""
+    print("Using Tavis-Cummings-like Model (TC)")
+    params = np.load("tc_params_AU.npz")
+    Vconst = params["ham_sys_AU"]
+    omega = params["w_AU"]
+    Vlin = params["Vklq_AU"]
+    if "mode_owner" not in params.files:
+        raise ValueError("tc_params_AU.npz is missing mode_owner. Regenerate with example/TEST_TC/TC_parameters_mash.py")
+    mode_owner = params["mode_owner"].astype(np.int32)
+    # Read optional metadata (N_QD, N_cavity, nstate_per_qd)
+    n_qd = int(params["N_QD"]) if "N_QD" in params.files else 0
+    n_cavity = int(params["N_cavity"]) if "N_cavity" in params.files else 0
+    nstate_per_qd = int(params["nstate_per_qd"]) if "nstate_per_qd" in params.files else 0
+    
+    # Infer dimensions from arrays in the file
+    ns = int(Vconst.shape[0])  # total electronic diabatic states (includes cavity states)
+    nw = int(omega.shape[0])  # total phonon modes
+    # Basic shape checks
+    if Vlin.shape[0] != nw or Vlin.shape[1] != ns or Vlin.shape[2] != ns:
+        raise ValueError(f"Vklq_AU has incompatible shape {Vlin.shape}, expected (nw,ns,ns)=({nw},{ns},{ns})")
+    if mode_owner.shape[0] != nw:
+        raise ValueError(f"mode_owner has length {mode_owner.shape[0]}, expected {nw}")
+
+    ns_qd = n_qd * nstate_per_qd if (n_qd > 0 and nstate_per_qd > 0) else None
+    if ns_qd is not None:
+        expected_ns = ns_qd + n_cavity
+        if expected_ns != ns:
+            raise ValueError(f"TC parameter file is inconsistent: N_QD * nstate_per_qd + N_cavity = {expected_ns}, but ham_sys_AU implies ns = {ns}")
+
+    # If cavities are present, ensure their indices are after QD blocks
+    if ns_qd is not None and n_cavity > 0:
+        cavity_start = ns_qd
+        if cavity_start < 0 or cavity_start > ns:
+            raise ValueError("Inconsistent TC metadata for cavity indexing")
+        cavity_slice = slice(cavity_start, ns)
+        if np.any(Vlin[:, cavity_slice, :]) or np.any(Vlin[:, :, cavity_slice]):
+            raise ValueError("TC cavity states must have zero phonon coupling in Vklq_AU")
+
+    print(f"Generating tc systems of dimensions {ns}, with bath modes {nw}")
+    if n_qd > 0:
+        print(f"TC layout: N_QD={n_qd}, nstate_per_qd={nstate_per_qd}, N_cavity={n_cavity} (cavity electronic states; cavity phonon coupling must be zero)")
+
+    # mode_owner is provided by tc_params_AU.npz (generated in TC_parameters_mash.py):
+    #   mode_owner[a] = 0  : shared/mixed mode
+    #   mode_owner[a] = i>0: mode local to QD i (1-based index)
+
+    lmd = np.einsum('aij->ij', Vlin**2/omega[:,None,None]**2/2)
+    print("reorganization energy arr: ", lmd)
+    n_shared = int(np.sum(mode_owner == 0))
+    print(f"TC mode partition: shared/mixed={n_shared}, qd-local={nw - n_shared}")
+    return Vconst, omega, Vlin, mode_owner, n_qd, nstate_per_qd, n_cavity, ns, nw
 
 
 def polaron_transform(w_Ohm,w_intra,c_Ohm,c_intra,Vconst,args):

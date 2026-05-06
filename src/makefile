@@ -1,6 +1,6 @@
 MODULE=mashf90
 # If you add any further potential module files, add them to the next line (must appear later than pes.o)
-OBJ=types.o maths.o pes.o linvib.o frexc.o tully.o mash.o qudvib.o
+OBJ=types.o maths.o pes.o linvib.o frexc.o tchybrid.o tully.o mash.o qudvib.o
 
 COMPILER=gfortran
 FCOMPILER=gnu95

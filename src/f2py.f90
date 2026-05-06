@@ -37,6 +37,19 @@ subroutine init_frexc(mass,omega,Vconst,kappa,nf,nf_bath,ns)
    call init(nf,ns,mass,omega,Vconst,kappa)
 end subroutine
 
+subroutine init_tchybrid(mass,omega,Vconst,Vlin,mode_owner,nf,ns,n_qd,nstate_per_qd,n_cavity)
+   use types
+   use tchybrid, only : init
+   integer, intent(in) :: nf, ns, n_qd, nstate_per_qd, n_cavity
+   integer, intent(in) :: mode_owner(nf)
+   real(dp), intent(in) :: mass(nf), omega(nf)
+   real(dp), intent(in) :: Vconst(ns,ns), Vlin(nf,ns,ns)
+!
+!  Initialize TC hybrid potential (shared + QD-local modes)
+!
+   call init(nf,ns,mass,omega,Vconst,Vlin,mode_owner,n_qd,nstate_per_qd,n_cavity)
+end subroutine
+
 subroutine init_tully(model,mass)
    use types
    use tully, only : init
