@@ -135,6 +135,9 @@ def setup_model(args):
     Delta = args.Delta
     nf = args.nf
     omega = np.zeros(nf,dtype=np.float64)
+    if args.complex_version and model != 'tc':
+        print("Warning: complex_version is currently implemented for model='tc' only. Using real backend for this model.")
+
     if model=='spinboson':
         # debye spectral density: J(w) = lmd/2 * wwc/(w^2 + wc^2)
         print("Using Ohmic Spectral Density...")
@@ -168,10 +171,7 @@ def setup_model(args):
     elif model == 'lvc':
         print("Using Linear Vibronic Model (LVC)")
         params = np.load("lvc_params_AU.npz")
-        if args.complex_version:
-            Vconst = np.array(params["ham_sys_AU"], dtype=np.complex128)
-        else:
-            Vconst = np.array(params["ham_sys_AU"].real, dtype=np.float64)
+        Vconst = np.array(params["ham_sys_AU"].real, dtype=np.float64)
         omega = params["w_AU"]
         Vlin = params["Vklq_AU"]
         ns = Vconst.shape[0]
@@ -183,10 +183,7 @@ def setup_model(args):
     elif model == 'qvc':
         print("Using Quadratic Vibronic Model (QVC)")
         params = np.load("qvc_params_AU.npz")
-        if args.complex_version:
-            Vconst = np.array(params["ham_sys_AU"], dtype=np.complex128)
-        else:
-            Vconst = np.array(params["ham_sys_AU"].real, dtype=np.float64)
+        Vconst = np.array(params["ham_sys_AU"].real, dtype=np.float64)
         omega = params["w_AU"]
         Vlin = params["Vklq_AU"]
         Wqud = params["Wklq_AU"]
@@ -409,7 +406,11 @@ def setup_model(args):
     elif model == 'tc':
         # TC hybrid backend uses mode_owner to know whether each mode is
         # shared across many states (owner=0) or local to one QD block (owner=i).
-        mashf90.init_tchybrid(mass,omega,Vconst,Vlin,mode_owner,nf,ns,n_qd,nstate_per_qd,n_cavity)
+        if args.complex_version:
+            mashf90.init_tchybrid_complex(mass,omega,np.asarray(Vconst,dtype=np.complex128),Vlin,mode_owner,nf,ns,n_qd,nstate_per_qd,n_cavity)
+            print(f"Complex TC mode enabled: complex Vconst only for TC with ns={ns}")
+        else:
+            mashf90.init_tchybrid(mass,omega,Vconst,Vlin,mode_owner,nf,ns,n_qd,nstate_per_qd,n_cavity)
     elif model in ['qvc']:
         mashf90.init_qudvib(mass,omega,Vconst,Vlin,Wqud,nf,ns)
     else:
@@ -423,6 +424,10 @@ def setup_tc_model(complex_version=False):
     params = np.load("tc_params_AU.npz")
     if complex_version:
         Vconst = np.array(params["ham_sys_AU"], dtype=np.complex128)
+        if np.any(np.abs(np.imag(np.diag(Vconst))) > 1e-12):
+            raise ValueError("In complex_version, ham_sys_AU must have real diagonal.")
+        if not np.allclose(Vconst, Vconst.conjugate().T, atol=1e-10, rtol=1e-10):
+            raise ValueError("In complex_version, ham_sys_AU must be Hermitian.")
     else:
         Vconst = np.array(params["ham_sys_AU"].real, dtype=np.float64)
     omega = params["w_AU"]
