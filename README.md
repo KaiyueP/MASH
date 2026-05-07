@@ -1,5 +1,5 @@
 ## Code for Multi-state MASH
-
+Please note that this is a code package of MASH developped upon xxx
 ## Overview
 This directory contains
 - A main Python script `mash.py` 
