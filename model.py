@@ -74,7 +74,6 @@ def read_args():
     parser.add_argument("-restart", action="store_true", help="Restart from existing checkpoint file if present.")
     parser.add_argument("-ckptfile", type=str, default="mash_ckpt.npz", help="Checkpoint filename.")
     parser.add_argument("-ckptfrac", type=float, default=0.1, help="Checkpoint fraction (e.g. 0.1 -> every 10%).")
-    parser.add_argument("--complex_version", action="store_true", help="Use complex Hermitian system Hamiltonian support when available.")
     args = parser.parse_args()
 
     # print input arguments:
@@ -105,7 +104,6 @@ def read_args():
     print("Electronic sampling: ",args.elsamp)
     print("Debug: ",args.debug)
     print("Ead computation: ",args.ead)
-    print("Complex version: ",args.complex_version)
     print("Seed: ",args.seed)
 
     """ ======= Convert input arguments to atomic units ======="""
@@ -135,9 +133,6 @@ def setup_model(args):
     Delta = args.Delta
     nf = args.nf
     omega = np.zeros(nf,dtype=np.float64)
-    if args.complex_version and model != 'tc':
-        print("Warning: complex_version is currently implemented for model='tc' only. Using real backend for this model.")
-
     if model=='spinboson':
         # debye spectral density: J(w) = lmd/2 * wwc/(w^2 + wc^2)
         print("Using Ohmic Spectral Density...")
@@ -183,7 +178,7 @@ def setup_model(args):
     elif model == 'qvc':
         print("Using Quadratic Vibronic Model (QVC)")
         params = np.load("qvc_params_AU.npz")
-        Vconst = np.array(params["ham_sys_AU"].real, dtype=np.float64)
+        Vconst = params["ham_sys_AU"]
         omega = params["w_AU"]
         Vlin = params["Vklq_AU"]
         Wqud = params["Wklq_AU"]
@@ -192,7 +187,7 @@ def setup_model(args):
         print(f"Generating qvc systems of dimensions {ns}, with bath modes {nf}")
     
     elif model == 'tc':
-        Vconst, omega, Vlin, mode_owner, n_qd, nstate_per_qd, n_cavity, ns, nf = setup_tc_model(args.complex_version)
+        Vconst, omega, Vlin, mode_owner, n_qd, nstate_per_qd, n_cavity, ns, nf = setup_tc_model()
 
     elif model=='fmo3':
         ns = 3
@@ -406,11 +401,7 @@ def setup_model(args):
     elif model == 'tc':
         # TC hybrid backend uses mode_owner to know whether each mode is
         # shared across many states (owner=0) or local to one QD block (owner=i).
-        if args.complex_version:
-            mashf90.init_tchybrid_complex(mass,omega,np.asarray(Vconst,dtype=np.complex128),Vlin,mode_owner,nf,ns,n_qd,nstate_per_qd,n_cavity)
-            print(f"Complex TC mode enabled: complex Vconst only for TC with ns={ns}")
-        else:
-            mashf90.init_tchybrid(mass,omega,Vconst,Vlin,mode_owner,nf,ns,n_qd,nstate_per_qd,n_cavity)
+        mashf90.init_tchybrid(mass,omega,Vconst,Vlin,mode_owner,nf,ns,n_qd,nstate_per_qd,n_cavity)
     elif model in ['qvc']:
         mashf90.init_qudvib(mass,omega,Vconst,Vlin,Wqud,nf,ns)
     else:
@@ -418,18 +409,11 @@ def setup_model(args):
     return mass,omega,nf,ns
 
 
-def setup_tc_model(complex_version=False):
+def setup_tc_model():
     """Load TC parameters with QD-local baths and cavity states without phonon coupling."""
     print("Using Tavis-Cummings-like Model (TC)")
     params = np.load("tc_params_AU.npz")
-    if complex_version:
-        Vconst = np.array(params["ham_sys_AU"], dtype=np.complex128)
-        if np.any(np.abs(np.imag(np.diag(Vconst))) > 1e-12):
-            raise ValueError("In complex_version, ham_sys_AU must have real diagonal.")
-        if not np.allclose(Vconst, Vconst.conjugate().T, atol=1e-10, rtol=1e-10):
-            raise ValueError("In complex_version, ham_sys_AU must be Hermitian.")
-    else:
-        Vconst = np.array(params["ham_sys_AU"].real, dtype=np.float64)
+    Vconst = params["ham_sys_AU"]
     omega = params["w_AU"]
     Vlin = params["Vklq_AU"]
     if "mode_owner" not in params.files:
