@@ -10,8 +10,8 @@
          subroutine symevp (a,lda,n,d,ierr)
 c
 c     ------------------------------------------------------------------
-c     This subroutine uses LAPACK DSYEVD to
-c     diagonalise a real symmetric matrix.
+c     This subroutine uses LAPACK ZHEEVD to
+c     diagonalise a complex Hermitian matrix.
 c     ------------------------------------------------------------------
 c
             dimension a(lda,n),d(n)

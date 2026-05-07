@@ -74,6 +74,7 @@ def read_args():
     parser.add_argument("-restart", action="store_true", help="Restart from existing checkpoint file if present.")
     parser.add_argument("-ckptfile", type=str, default="mash_ckpt.npz", help="Checkpoint filename.")
     parser.add_argument("-ckptfrac", type=float, default=0.1, help="Checkpoint fraction (e.g. 0.1 -> every 10%).")
+    parser.add_argument("--complex_version", action="store_true", help="Use complex Hermitian system Hamiltonian support when available.")
     args = parser.parse_args()
 
     # print input arguments:
@@ -104,6 +105,7 @@ def read_args():
     print("Electronic sampling: ",args.elsamp)
     print("Debug: ",args.debug)
     print("Ead computation: ",args.ead)
+    print("Complex version: ",args.complex_version)
     print("Seed: ",args.seed)
 
     """ ======= Convert input arguments to atomic units ======="""
@@ -166,7 +168,10 @@ def setup_model(args):
     elif model == 'lvc':
         print("Using Linear Vibronic Model (LVC)")
         params = np.load("lvc_params_AU.npz")
-        Vconst = params["ham_sys_AU"]
+        if args.complex_version:
+            Vconst = np.array(params["ham_sys_AU"], dtype=np.complex128)
+        else:
+            Vconst = np.array(params["ham_sys_AU"].real, dtype=np.float64)
         omega = params["w_AU"]
         Vlin = params["Vklq_AU"]
         ns = Vconst.shape[0]
@@ -178,7 +183,10 @@ def setup_model(args):
     elif model == 'qvc':
         print("Using Quadratic Vibronic Model (QVC)")
         params = np.load("qvc_params_AU.npz")
-        Vconst = params["ham_sys_AU"]
+        if args.complex_version:
+            Vconst = np.array(params["ham_sys_AU"], dtype=np.complex128)
+        else:
+            Vconst = np.array(params["ham_sys_AU"].real, dtype=np.float64)
         omega = params["w_AU"]
         Vlin = params["Vklq_AU"]
         Wqud = params["Wklq_AU"]
@@ -187,7 +195,7 @@ def setup_model(args):
         print(f"Generating qvc systems of dimensions {ns}, with bath modes {nf}")
     
     elif model == 'tc':
-        Vconst, omega, Vlin, mode_owner, n_qd, nstate_per_qd, n_cavity, ns, nf = setup_tc_model()
+        Vconst, omega, Vlin, mode_owner, n_qd, nstate_per_qd, n_cavity, ns, nf = setup_tc_model(args.complex_version)
 
     elif model=='fmo3':
         ns = 3
@@ -409,11 +417,14 @@ def setup_model(args):
     return mass,omega,nf,ns
 
 
-def setup_tc_model():
+def setup_tc_model(complex_version=False):
     """Load TC parameters with QD-local baths and cavity states without phonon coupling."""
     print("Using Tavis-Cummings-like Model (TC)")
     params = np.load("tc_params_AU.npz")
-    Vconst = params["ham_sys_AU"]
+    if complex_version:
+        Vconst = np.array(params["ham_sys_AU"], dtype=np.complex128)
+    else:
+        Vconst = np.array(params["ham_sys_AU"].real, dtype=np.float64)
     omega = params["w_AU"]
     Vlin = params["Vklq_AU"]
     if "mode_owner" not in params.files:
