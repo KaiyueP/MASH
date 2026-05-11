@@ -4,17 +4,20 @@ import numpy as np
 # User settings for TC model
 # ============================================================
 # system setup
-nstate_per_qd = 4
-nqd_per_layer = 5
-nlayers = 3 #need to be fixed here
-nmode_per_qd = 30
-N_cavity = 20
+complex_mode = False
+nstate_per_qd = 2
+nqd_per_layer = 2
+nlayers = 3 #need to be3 fixed here
+nmode_per_qd = 10
+N_cavity = 3
 L=40.0*1e-6 #um to m cavity length
-QD_1="3.9nm_4ML" #low energy
-QD_2="3.9nm_3ML" #medium energy	
-QD_3="3.0nm_4ML" #high energy
+QD_1="3.9CdSe_4ML" #low energy
+QD_2="3.9CdSe_3ML" #medium energy	
+QD_3="3.0CdSe_4ML" #high energy
 QD_spacing = 20 *1e-9 #nm to m
 N_QD = nlayers * nqd_per_layer
+d_v = 10e-9 #nm to m, spacing between layers
+g_s_ref_eV=10e-3 #eV to au #coupling strength
 
 # Fundamental constants and unit conversions
 kb=1.380649e-23
@@ -42,7 +45,7 @@ def load_sorted_mode_block(qd_name):
 	from the raw files.
 	sort using first 10 states
 	"""
- 	# in SI
+	# in SI
 	w_SI = np.loadtxt("/pscratch/sd/k/kaiyuep/QD_data/%s/w.dat" % qd_name)[:, 1][6:] * 2 * np.pi * 1e12
 	Vklq_SI = np.load("/pscratch/sd/k/kaiyuep/QD_data/%s/Vklq.npy" % qd_name)[6:, :10, :10] 
 
@@ -94,13 +97,11 @@ E_c=ExcEn3[0]*autoj #in Ha to j
 lambda_c = hbar*2*np.pi*c/E_c #m
 L_cavity = lambda_c/2 #m
 k_x=2*np.pi*np.arange(0, N_cavity)/L
-k_z=E_c*evtoj/(hbar*c)
+k_z=E_c/(hbar*c)
 E_cavity = hbar*c*np.sqrt(k_x**2 + k_z**2)*jtoau #j to au 
-
+g_s_ref=g_s_ref_eV*evtoau #eV to au
 x_QD=np.arange(nqd_per_layer)*QD_spacing
-d_v = 10e-9 #nm to m, spacing between layers
 z_QD = np.array([L_cavity/2 - d_v, L_cavity/2, L_cavity/2 + d_v ]) #m
-g_s_ref=1e-3*evtoau #eV to au #coupling strength
 
 
 #reorg in eV
@@ -116,7 +117,11 @@ np.savetxt("lmd3_nm.dat", lmd3, fmt="%.16f")
 # State ordering: [QD0 states, QD1 states, ..., QD(N_QD-1) states, CAV states]
 # ============================================================
 ns = N_QD * nstate_per_qd + N_cavity
-ham_sys_AU = np.zeros((ns, ns), dtype=float)
+if complex_mode:
+    print("Using complex mode, complex ham_sys_AU, but error may rise due to MASH real-valued expectation of coupling. ")
+else:
+	print("Using real mode, real ham_sys_AU")
+ham_sys_AU = np.zeros((ns, ns), dtype=complex if complex_mode else float)
 
 # QD diagonal energies: build sequence of QD blocks per layer
 # QD types for each layer (assume layers correspond to QD_1, QD_2, QD_3)
@@ -126,7 +131,7 @@ ExcEn3_layer = np.tile(ExcEn3, nqd_per_layer)
 ExcEn = np.concatenate([ExcEn1_layer, ExcEn2_layer, ExcEn3_layer]) 
 ham_sys_AU[:N_QD * nstate_per_qd, :N_QD * nstate_per_qd] = np.diag(ExcEn)
 if N_QD*nstate_per_qd != ns - N_cavity:
-    	raise ValueError("Mismatch in state counts: QD states = %d, expected %d" % (N_QD*nstate_per_qd, ns - N_cavity))	
+    raise ValueError("Mismatch in state counts: QD states = %d, expected %d" % (N_QD*nstate_per_qd, ns - N_cavity))
 ham_sys_AU[N_QD * nstate_per_qd:, N_QD * nstate_per_qd:] = np.diag(E_cavity)
 
 # off diagonal cavity-QD coupling
@@ -139,14 +144,23 @@ for layer_idx, (mu_block, z_qd) in enumerate([(mu1, z_QD[0]), (mu2, z_QD[1]), (m
 		for j in range(nstate_per_qd):
 			qd_state = layer_state_offset + i * nstate_per_qd + j
 			for l in range(N_cavity):
-				g_s = g_s_ref / mu_max * mu_block[j] / np.sqrt(E_cavity[0]) * np.sqrt(E_cavity[l]) * \
-					np.sin(k_z * z_qd) * \
-					np.exp(-1j * k_x[l] * x_qd)
+				if complex_mode:
+					g_s = g_s_ref / mu_max * mu_block[j] / np.sqrt(E_cavity[0]) * np.sqrt(E_cavity[l]) * \
+						np.sin(k_z * z_qd) * \
+						np.exp(-1j * k_x[l] * x_qd)
+					cav_state = N_QD * nstate_per_qd + l
+					ham_sys_AU[cav_state, qd_state] = g_s
+					ham_sys_AU[qd_state, cav_state] = g_s.conjugate()
+				else:
+					g_s = g_s_ref / mu_max * mu_block[j] / np.sqrt(E_cavity[0]) * np.sqrt(E_cavity[l]) * \
+						np.sin(k_z * z_qd)
+					cav_state = N_QD * nstate_per_qd + l
+					ham_sys_AU[cav_state, qd_state] = g_s
+					ham_sys_AU[qd_state, cav_state] = g_s
 
-				cav_state = N_QD * nstate_per_qd + l
-				ham_sys_AU[cav_state, qd_state] = g_s
-				ham_sys_AU[qd_state, cav_state] = g_s.conjugate()
-    
+
+
+ 
 # ============================================================
 # Build QD-local baths: each QD gets an identical bath block.
 # Cavity states remain phonon-free.

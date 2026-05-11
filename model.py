@@ -401,7 +401,7 @@ def setup_model(args):
     elif model == 'tc':
         # TC hybrid backend uses mode_owner to know whether each mode is
         # shared across many states (owner=0) or local to one QD block (owner=i).
-        mashf90.init_tchybrid(mass,omega,Vconst,Vlin,mode_owner,nf,ns,n_qd,nstate_per_qd,n_cavity)
+        mashf90.init_tchybrid(mass,omega,Vconst,Vlin,mode_owner,n_qd,nstate_per_qd,n_cavity,nf=nf,ns=ns)
     elif model in ['qvc']:
         mashf90.init_qudvib(mass,omega,Vconst,Vlin,Wqud,nf,ns)
     else:
@@ -460,8 +460,7 @@ def setup_tc_model():
     print("reorganization energy arr: ", lmd)
     n_shared = int(np.sum(mode_owner == 0))
     print(f"TC mode partition: shared/mixed={n_shared}, qd-local={nw - n_shared}")
-    return Vconst, omega, Vlin, mode_owner, n_qd, nstate_per_qd, n_cavity, ns, nw
-
+    return Vconst, omega, Vlin, mode_owner, n_qd, nstate_per_qd, n_cavity, ns, nw 
 
 def polaron_transform(w_Ohm,w_intra,c_Ohm,c_intra,Vconst,args):
     """ Calculate renormalized Vconst from selected set of modes through the polaron transformation """

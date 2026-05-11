@@ -137,7 +137,7 @@ contains
       real(dp), intent(in) :: q(nf)
       real(dp), intent(out) :: V(ns,ns)
 
-      integer :: i, n, m, s0, s1, ns_ex
+      integer :: i, n, s0, s1
       real(dp) :: V0
 
       ! Build diabatic potential: start from the constant part and add
@@ -145,8 +145,6 @@ contains
       ! mode's active electronic block.
       V = Vconst
       V0 = 0.5d0 * sum(mass*(omega*q)**2)
-      ns_ex = ns - n_cavity
-      if (ns_ex < 0) ns_ex = 0
 
       do i = 1, nf
          ! Keep the explicit loop: each mode can target a different block,
@@ -158,9 +156,10 @@ contains
          end if
       end do
 
-      ! Add harmonic diagonal contribution only to electronic (non-cavity)
-      ! states (1..ns_ex). Cavity states are excluded by design.
-      do n = 1, ns_ex
+      ! The harmonic nuclear energy is a scalar V0(q) * I. It must be added
+      ! to every diabatic state; otherwise photon states are artificially
+      ! detuned from QD states by the bath energy.
+      do n = 1, ns
          V(n,n) = V(n,n) + V0
       end do
    end subroutine
@@ -170,23 +169,19 @@ contains
       real(dp), intent(in) :: q(:)
       real(dp), intent(out) :: G(nf,ns,ns)
 
-      integer :: n, ns_ex
+      integer :: n
       real(dp), allocatable :: G0(:)
 
       ! Build gradient tensor G(i,:,:) = dV/dq_i.
       ! For efficiency we copy the precomputed linear tensors `Vlin` into
       ! `G` and then add the harmonic diagonal term if required.
       G = Vlin
-      ns_ex = ns - n_cavity
-      if (ns_ex < 0) then
-         error stop 'Invalid block-structure (ns_ex < 0) parameters in tchybrid.f90'
-      end if
 
       if (cayley) return
 
       allocate(G0(nf))
       G0 = mass*omega**2 * q
-      do n = 1, ns_ex
+      do n = 1, ns
          G(:,n,n) = G(:,n,n) + G0
       end do
       deallocate(G0)
@@ -198,8 +193,9 @@ contains
    ! - `q` : phonon coordinates (size `nf`)
    ! - `U` : matrix of adiabatic eigenvectors (size ns x ns); column `a`
    !         is the eigenvector for which we compute derivatives.
-   ! - `a` : adiabatic-state index (integer). If `a` is in the cavity
-   !         region (> ns_ex) the routine returns immediately.
+   ! - `a` : adiabatic-state index (integer). The eigenvector may contain
+   !         both QD and cavity components, so forces are evaluated from
+   !         its QD components through the owner-restricted Vlin blocks.
    !
    ! Outputs:
    ! - `dvdq(i)` = <U_a | dV/dq_i | U_a> for each phonon mode i.
@@ -216,21 +212,15 @@ contains
    ! window s0:s1, compute tmp = Vlin(i,block)*Ublk and then
    ! dvdq(i) = dot_product(Ublk,tmp) which equals <U_a|dV/dq_i|U_a>.
    subroutine grad_a_tchybrid(q, U, a, dvdq)
-      use pes, only : nf, ns, cayley, mass, omega
+      use pes, only : nf, cayley, mass, omega
       real(dp), intent(in) :: q(:), U(:,:)
       integer :: a
       real(dp), intent(out) :: dvdq(nf)
 
-      integer :: i, s0, s1, ns_ex
+      integer :: i, s0, s1
       real(dp), allocatable :: Ublk(:), tmp(:)
 
       dvdq = 0.d0
-      ns_ex = ns - n_cavity
-      if (ns_ex < 0) then
-         error stop 'Invalid block-structure (ns_ex < 0) parameters in tchybrid.f90'
-      end if
-      ! If `a` indexes a cavity state, there is no phonon coupling.
-      if (a > ns_ex) return
       do i = 1, nf
          ! Use the same owner-restricted subspace in adiabatic force evaluation.
          s0 = mode_s0(i)
