@@ -1,0 +1,16 @@
+usage: mash.py [-h]
+               [-model {spinboson,fmo3,fmo7,fmo8,tully1,tully2,lh2,lhc2,lvc,qvc,tc}]
+               [-basis {exc,site,adia,dia}] [-units {au,cmm1,fs}]
+               [-obstyp {pop,nuc}] [-init INIT]
+               [-initbasis {dia,adia,site,exc}]
+               [-nucsamp {classical,cl,wigner,wig,GS,clzero,WP}]
+               [-elsamp {focused,theta}] [-boltzinit] [-beta BETA] [-T T]
+               [-debug] [-seed SEED] [-ead] [-dt DT] [-nt NT] [-ntraj NTRAJ]
+               [-nf NF] [-npar NPAR] [-Delta DELTA] [-epsilon EPSILON]
+               [-lamda LAMDA] [-omegac OMEGAC] [-disorder {none,fmo,lhc2}]
+               [-bath {debye,coursegrain,B777}] [-wmax WMAX]
+               [-polaron {vpt,langfirsov}] [-WPenergy WPENERGY] [-gamma GAMMA]
+               [-pinit PINIT] [-ckpt] [-restart] [-ckptfile CKPTFILE]
+               [-ckptfrac CKPTFRAC]
+mash.py: error: [Errno 2] No such file or directory: 'tc_ext.in'
+cp: cannot stat 'pop.out': No such file or directory

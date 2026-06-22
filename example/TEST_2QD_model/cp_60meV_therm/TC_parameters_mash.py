@@ -14,7 +14,7 @@ N_cavity = 1
 QD_1="3.0CdSe_2ML" # QD coupled to local phonon bath 1
 QD_2="3.0CdSe_2ML" # QD coupled to local phonon bath 2
 N_QD = nqd
-g_s_ref_eV=1e-3 #eV to au #coupling strength
+g_s_ref_eV=60e-3 #eV to au #coupling strength
 distance = 6 #nm
 # Fundamental constants and unit conversions
 kb=1.380649e-23

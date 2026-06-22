@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/pscratch/sd/k/kaiyuep/mash_test/2QD_1meV/mash.py", line 145, in <module>
+    mass, omega, nf, ns = model.setup_model(args)
+  File "/global/homes/k/kaiyuep/multimash/model.py", line 190, in setup_model
+    Vconst, omega, Vlin, mode_owner, n_qd, nstate_per_qd, n_cavity, ns, nf = setup_tc_model()
+  File "/global/homes/k/kaiyuep/multimash/model.py", line 449, in setup_tc_model
+    raise ValueError("TC cavity states must have zero phonon coupling in Vklq_AU")
+ValueError: TC cavity states must have zero phonon coupling in Vklq_AU
+cp: cannot stat 'pop.out': No such file or directory

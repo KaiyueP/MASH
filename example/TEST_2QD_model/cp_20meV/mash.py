@@ -50,7 +50,6 @@ def _ckpt_meta(args, nf, ns):
         basis=str(args.basis),
         units=str(getattr(args, "units", "")),
         beta=float(args.beta),
-        boltzinit=bool(getattr(args, "boltzinit", False)),
         nf=int(nf),
         ns=int(ns),
         nt=int(args.nt),
@@ -97,7 +96,6 @@ t_loop0 = None
 # Read input parameters
 # ============================================================
 args = model.read_args()
-r0_print(f"MASH calculation started at: {time.strftime('%Y-%m-%d %H:%M:%S %Z')}")
 
 def announce_tc_setup(args):
     if args.model == "tc":
