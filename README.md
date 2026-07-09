@@ -252,6 +252,12 @@ Typical outputs include:
 
 
 
+For Bolzmann initial condition
+-model lvc -boltzinit -boltzstates 0,1,2,3
+-model lvc -boltzinit -boltzstates 0:3
+-model tc -boltzinit -init 0
+For defined distribution
+-model lvc -initstates 0,1 -initpops 0.8,0.2
 
 ***
 

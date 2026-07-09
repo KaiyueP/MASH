@@ -1,0 +1,46 @@
+Input arguments:
+Model:  lvc
+Units:  au
+Observable type:  pop
+Initial state:  0
+Initial custom states:  None
+Initial custom probabilities:  None
+Initial basis:  dia
+Temperature:  300.0
+Reciprocal temperature:  1.0
+Number of bath modes:  1
+Number of time steps:  500
+Time step:  40.0
+Number of trajectories:  128
+Number of parallel processors:  128
+Diabatic coupling:  1.0
+Energy bias:  0.0
+Reorganization energy:  0
+Cutoff frequency:  0.0
+Disorder:  none
+Bath:  debye
+Polaron transformation:  None
+Wavepacket energy:  0.0
+Wavepacket width:  0.0
+Initial momentum:  0.0
+Nuclear sampling:  classical
+Electronic sampling:  focused
+Boltzmann initial distribution:  False
+Boltzmann initial states:  None
+Debug:  False
+Ead computation:  False
+Seed:  None
+Using Linear Vibronic Model (LVC)
+Generating lvc systems of dimensions 2, with bath modes 200
+reorganization energy arr:  [[0. 0.]
+ [0. 0.]]
+
+================ Timing ================
+MPI ranks             : 1
+Total wall time (max) : 0:00:00.621
+Loop wall time  (max) : 0:00:00.059
+Fortran time   (max)  : 0:00:00.052  (87.0% of loop)
+Requested trajectories: 128
+Target effective traj : 128  (npar=128)
+========================================
+

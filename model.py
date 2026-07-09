@@ -40,13 +40,19 @@ def read_args():
     parser.add_argument("-obstyp", type=str, default="pop", help="Observable types", 
                         choices=["pop","nuc"])
     parser.add_argument("-init", type=int,help="Initial state (in Python indexing)")
+    parser.add_argument("-initstates", type=str, default=None,
+                        help="Comma-separated state indices for a custom initial-state distribution, e.g. '0,1,3'.")
+    parser.add_argument("-initpops", type=str, default=None,
+                        help="Comma-separated probabilities for -initstates, e.g. '0.5,0.3,0.2'. Must sum to 1.")
     parser.add_argument("-initbasis",type=str,default='dia',choices=["dia","adia","site","exc"],help='Basis for initial state')
     parser.add_argument("-nucsamp",type=str,default='cl', 
                         help="Nuclear sampling. classical/cl=classical, wigner/wig=thermal wigner, GS=ground state Wigner, clzero=classical T=0, WP=wavepacket",
                         choices=['classical','cl','wigner','wig','GS','clzero','WP'])
     parser.add_argument("-elsamp",type=str,default='focused',choices=["focused","theta"],help='Choice of initial distribution')
     parser.add_argument("-boltzinit", action="store_true",
-                        help="For tc model, sample the initial electronic state from the Boltzmann distribution within the QD block containing -init.")
+                        help="Sample the initial electronic state from a Boltzmann distribution. For tc, thermalize the QD block containing -init. For lvc, use -boltzstates.")
+    parser.add_argument("-boltzstates", type=str, default=None,
+                        help="For lvc -boltzinit, electronic state indices to thermalize, e.g. '0,1,2,3' or inclusive range '0:3'.")
     parser.add_argument("-beta",type=float,default=1.,help="Reciprocal temperature [in a.u.]")
     parser.add_argument("-T",type=float,default=0,help="Temperature [in kelvin]")
     # Debugging
@@ -85,6 +91,8 @@ def read_args():
     print("Units: ",args.units)
     print("Observable type: ",args.obstyp)
     print("Initial state: ",args.init)
+    print("Initial custom states: ",args.initstates)
+    print("Initial custom probabilities: ",args.initpops)
     print("Initial basis: ",args.initbasis)
     print("Temperature: ",args.T)
     print("Reciprocal temperature: ",args.beta)
@@ -105,7 +113,8 @@ def read_args():
     print("Initial momentum: ",args.pinit)
     print("Nuclear sampling: ",args.nucsamp)
     print("Electronic sampling: ",args.elsamp)
-    print("Boltzmann initial QD distribution: ",args.boltzinit)
+    print("Boltzmann initial distribution: ",args.boltzinit)
+    print("Boltzmann initial states: ",args.boltzstates)
     print("Debug: ",args.debug)
     print("Ead computation: ",args.ead)
     print("Seed: ",args.seed)
@@ -603,6 +612,67 @@ def debug(args,mass,omega,nf,ns):
 
     plt.show()
 
+def parse_boltz_states(state_spec, ns):
+    """Parse comma-separated state indices and inclusive ranges such as 0:3."""
+    if state_spec is None:
+        raise ValueError("-boltzstates is required for lvc -boltzinit, e.g. -boltzstates 0,1,2,3 or -boltzstates 0:3.")
+
+    states = []
+    for token in state_spec.split(','):
+        token = token.strip()
+        if not token:
+            continue
+        if ':' in token:
+            parts = token.split(':')
+            if len(parts) != 2 or not parts[0].strip() or not parts[1].strip():
+                raise ValueError(f"Invalid -boltzstates range '{token}'. Use inclusive ranges like 0:3.")
+            start = int(parts[0])
+            stop = int(parts[1])
+            step = 1 if stop >= start else -1
+            states.extend(range(start, stop + step, step))
+        else:
+            states.append(int(token))
+
+    if not states:
+        raise ValueError("-boltzstates did not contain any states.")
+
+    state_arr = np.array(states, dtype=np.int64)
+    if np.any(state_arr < 0) or np.any(state_arr >= ns):
+        raise ValueError(f"-boltzstates contains indices outside valid range 0:{ns - 1}.")
+
+    return np.unique(state_arr)
+
+def parse_init_distribution(args, ns):
+    """Parse a custom discrete initial-state distribution from -initstates/-initpops."""
+    if args.initstates is None and args.initpops is None:
+        return None
+    if args.initstates is None or args.initpops is None:
+        raise ValueError("Custom initial-state distribution requires both -initstates and -initpops.")
+
+    states = [int(token.strip()) for token in args.initstates.split(',') if token.strip()]
+    pops = [float(token.strip()) for token in args.initpops.split(',') if token.strip()]
+
+    if not states:
+        raise ValueError("-initstates did not contain any states.")
+    if len(states) != len(pops):
+        raise ValueError("-initstates and -initpops must contain the same number of entries.")
+
+    state_arr = np.array(states, dtype=np.int64)
+    pop_arr = np.array(pops, dtype=np.float64)
+
+    if np.any(state_arr < 0) or np.any(state_arr >= ns):
+        raise ValueError(f"-initstates contains indices outside valid range 0:{ns - 1}.")
+    if len(np.unique(state_arr)) != len(state_arr):
+        raise ValueError("-initstates contains duplicate state indices.")
+    if np.any(pop_arr < 0.0):
+        raise ValueError("-initpops probabilities must be non-negative.")
+
+    total_pop = np.sum(pop_arr)
+    if not np.isclose(total_pop, 1.0, rtol=1e-10, atol=1e-12):
+        raise ValueError(f"-initpops probabilities must sum to 1. Got {total_pop:.16g}.")
+
+    return state_arr, pop_arr
+
 def sample(args,mass,omega,nf,ns):
     """ Sample npar sets of initial phase-space variables.
         qe and pe are real and imaginary parts of c in the diabatic representation """
@@ -612,6 +682,10 @@ def sample(args,mass,omega,nf,ns):
     p = np.empty((nf,npar),order="F")
     qe = np.empty((ns,npar),order="F")
     pe = np.empty((ns,npar),order="F")
+    init_distribution = parse_init_distribution(args, ns)
+
+    if init_distribution is not None and args.model != 'lvc':
+        raise ValueError("Custom -initstates/-initpops is currently supported only for -model lvc.")
 
     if args.disorder!='none':
         Vconst_dis = np.copy(Vconst)
@@ -670,24 +744,34 @@ def sample(args,mass,omega,nf,ns):
             p[:,j] = np.random.normal(pmean,psig,nf)
 
         init_state = args.init
+        if args.boltzinit and init_distribution is not None:
+            raise ValueError("Use either -boltzinit or custom -initstates/-initpops, not both.")
+
         if args.boltzinit:
-            if args.model != 'tc':
-                raise ValueError("-boltzinit is currently defined only for the tc model.")
-            if init_state is None:
-                raise ValueError("-boltzinit requires -init to select which QD block to thermalize.")
-            if tc_n_qd <= 0 or tc_nstate_per_qd <= 0:
-                raise ValueError("TC metadata unavailable; cannot build Boltzmann initial QD distribution.")
+            if args.model == 'tc':
+                if init_state is None:
+                    raise ValueError("-boltzinit requires -init to select which QD block to thermalize.")
+                if tc_n_qd <= 0 or tc_nstate_per_qd <= 0:
+                    raise ValueError("TC metadata unavailable; cannot build Boltzmann initial QD distribution.")
 
-            qd_idx = init_state // tc_nstate_per_qd
-            if qd_idx >= tc_n_qd:
-                raise ValueError("-init points to a cavity state; choose a state inside the QD to thermalize.")
+                qd_idx = init_state // tc_nstate_per_qd
+                if qd_idx >= tc_n_qd:
+                    raise ValueError("-init points to a cavity state; choose a state inside the QD to thermalize.")
 
-            qd_start = qd_idx * tc_nstate_per_qd
-            qd_states = np.arange(qd_start, qd_start + tc_nstate_per_qd)
-            qd_energies = np.diag(Vconst)[qd_states]
-            weights = np.exp(-beta * (qd_energies - np.min(qd_energies)))
+                qd_start = qd_idx * tc_nstate_per_qd
+                boltz_states = np.arange(qd_start, qd_start + tc_nstate_per_qd)
+            elif args.model == 'lvc':
+                boltz_states = parse_boltz_states(args.boltzstates, ns)
+            else:
+                raise ValueError("-boltzinit is currently defined only for the tc and lvc models.")
+
+            boltz_energies = np.diag(Vconst)[boltz_states]
+            weights = np.exp(-beta * (boltz_energies - np.min(boltz_energies)))
             weights /= np.sum(weights)
-            init_state = np.random.choice(qd_states, p=weights)
+            init_state = np.random.choice(boltz_states, p=weights)
+        elif init_distribution is not None:
+            init_states, init_probs = init_distribution
+            init_state = np.random.choice(init_states, p=init_probs)
 
         """ Electronic sampling """
         if args.elsamp in ['theta']:

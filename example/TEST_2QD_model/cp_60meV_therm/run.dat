@@ -9,7 +9,7 @@ Reciprocal temperature:  1.0
 Number of bath modes:  1
 Number of time steps:  500
 Time step:  40.0
-Number of trajectories:  12800
+Number of trajectories:  128000
 Number of parallel processors:  128
 Diabatic coupling:  1.0
 Energy bias:  0.0
@@ -59,873 +59,905 @@ reorganization energy arr:  [[3.71233752e-04 9.48797904e-05 9.43544934e-05 3.382
   0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00
   0.00000000e+00]]
 TC mode partition: shared/mixed=0, qd-local=400
+[restart] loaded test_real_ckpt.npz: attempted=12800, success=12800, discarded=0
+[restart] remaining batches = 900 (remaining traj = 115200) to reach target 128000.
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 1/100
-Attempted : 128/12800
-Success   : 128
+Progress  : batches 110/1000
+Attempted : 14080/128000
+Success   : 14080
 Discarded : 0
 =========================================
 
-[checkpoint] batches 1/100 attempted=128/12800 success=128 discarded=0
+[checkpoint] batches 110/1000 attempted=14080/128000 success=14080 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 2/100
-Attempted : 256/12800
-Success   : 256
+Progress  : batches 120/1000
+Attempted : 15360/128000
+Success   : 15360
 Discarded : 0
 =========================================
 
-[checkpoint] batches 2/100 attempted=256/12800 success=256 discarded=0
+[checkpoint] batches 120/1000 attempted=15360/128000 success=15360 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 3/100
-Attempted : 384/12800
-Success   : 384
+Progress  : batches 130/1000
+Attempted : 16640/128000
+Success   : 16640
 Discarded : 0
 =========================================
 
-[checkpoint] batches 3/100 attempted=384/12800 success=384 discarded=0
+[checkpoint] batches 130/1000 attempted=16640/128000 success=16640 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 4/100
-Attempted : 512/12800
-Success   : 512
+Progress  : batches 140/1000
+Attempted : 17920/128000
+Success   : 17920
 Discarded : 0
 =========================================
 
-[checkpoint] batches 4/100 attempted=512/12800 success=512 discarded=0
+[checkpoint] batches 140/1000 attempted=17920/128000 success=17920 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 5/100
-Attempted : 640/12800
-Success   : 640
+Progress  : batches 151/1000
+Attempted : 19328/128000
+Success   : 19328
 Discarded : 0
 =========================================
 
-[checkpoint] batches 5/100 attempted=640/12800 success=640 discarded=0
+[checkpoint] batches 151/1000 attempted=19328/128000 success=19328 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 7/100
-Attempted : 896/12800
-Success   : 896
+Progress  : batches 160/1000
+Attempted : 20480/128000
+Success   : 20480
 Discarded : 0
 =========================================
 
-[checkpoint] batches 7/100 attempted=896/12800 success=896 discarded=0
+[checkpoint] batches 160/1000 attempted=20480/128000 success=20480 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 8/100
-Attempted : 1024/12800
-Success   : 1024
+Progress  : batches 170/1000
+Attempted : 21760/128000
+Success   : 21760
 Discarded : 0
 =========================================
 
-[checkpoint] batches 8/100 attempted=1024/12800 success=1024 discarded=0
+[checkpoint] batches 170/1000 attempted=21760/128000 success=21760 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 9/100
-Attempted : 1152/12800
-Success   : 1152
+Progress  : batches 181/1000
+Attempted : 23168/128000
+Success   : 23168
 Discarded : 0
 =========================================
 
-[checkpoint] batches 9/100 attempted=1152/12800 success=1152 discarded=0
+[checkpoint] batches 181/1000 attempted=23168/128000 success=23168 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 10/100
-Attempted : 1280/12800
-Success   : 1280
+Progress  : batches 190/1000
+Attempted : 24320/128000
+Success   : 24320
 Discarded : 0
 =========================================
 
-[checkpoint] batches 10/100 attempted=1280/12800 success=1280 discarded=0
+[checkpoint] batches 190/1000 attempted=24320/128000 success=24320 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 11/100
-Attempted : 1408/12800
-Success   : 1408
+Progress  : batches 200/1000
+Attempted : 25600/128000
+Success   : 25600
 Discarded : 0
 =========================================
 
-[checkpoint] batches 11/100 attempted=1408/12800 success=1408 discarded=0
+[checkpoint] batches 200/1000 attempted=25600/128000 success=25600 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 12/100
-Attempted : 1536/12800
-Success   : 1536
+Progress  : batches 211/1000
+Attempted : 27008/128000
+Success   : 27008
 Discarded : 0
 =========================================
 
-[checkpoint] batches 12/100 attempted=1536/12800 success=1536 discarded=0
+[checkpoint] batches 211/1000 attempted=27008/128000 success=27008 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 13/100
-Attempted : 1664/12800
-Success   : 1664
+Progress  : batches 220/1000
+Attempted : 28160/128000
+Success   : 28160
 Discarded : 0
 =========================================
 
-[checkpoint] batches 13/100 attempted=1664/12800 success=1664 discarded=0
+[checkpoint] batches 220/1000 attempted=28160/128000 success=28160 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 15/100
-Attempted : 1920/12800
-Success   : 1920
+Progress  : batches 230/1000
+Attempted : 29440/128000
+Success   : 29440
 Discarded : 0
 =========================================
 
-[checkpoint] batches 15/100 attempted=1920/12800 success=1920 discarded=0
+[checkpoint] batches 230/1000 attempted=29440/128000 success=29440 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 16/100
-Attempted : 2048/12800
-Success   : 2048
+Progress  : batches 241/1000
+Attempted : 30848/128000
+Success   : 30848
 Discarded : 0
 =========================================
 
-[checkpoint] batches 16/100 attempted=2048/12800 success=2048 discarded=0
+[checkpoint] batches 241/1000 attempted=30848/128000 success=30848 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 17/100
-Attempted : 2176/12800
-Success   : 2176
+Progress  : batches 250/1000
+Attempted : 32000/128000
+Success   : 32000
 Discarded : 0
 =========================================
 
-[checkpoint] batches 17/100 attempted=2176/12800 success=2176 discarded=0
+[checkpoint] batches 250/1000 attempted=32000/128000 success=32000 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 19/100
-Attempted : 2432/12800
-Success   : 2432
+Progress  : batches 260/1000
+Attempted : 33280/128000
+Success   : 33280
 Discarded : 0
 =========================================
 
-[checkpoint] batches 19/100 attempted=2432/12800 success=2432 discarded=0
+[checkpoint] batches 260/1000 attempted=33280/128000 success=33280 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 20/100
-Attempted : 2560/12800
-Success   : 2560
+Progress  : batches 270/1000
+Attempted : 34560/128000
+Success   : 34560
 Discarded : 0
 =========================================
 
-[checkpoint] batches 20/100 attempted=2560/12800 success=2560 discarded=0
+[checkpoint] batches 270/1000 attempted=34560/128000 success=34560 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 22/100
-Attempted : 2816/12800
-Success   : 2816
+Progress  : batches 280/1000
+Attempted : 35840/128000
+Success   : 35840
 Discarded : 0
 =========================================
 
-[checkpoint] batches 22/100 attempted=2816/12800 success=2816 discarded=0
+[checkpoint] batches 280/1000 attempted=35840/128000 success=35840 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 23/100
-Attempted : 2944/12800
-Success   : 2944
+Progress  : batches 291/1000
+Attempted : 37248/128000
+Success   : 37248
 Discarded : 0
 =========================================
 
-[checkpoint] batches 23/100 attempted=2944/12800 success=2944 discarded=0
+[checkpoint] batches 291/1000 attempted=37248/128000 success=37248 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 25/100
-Attempted : 3200/12800
-Success   : 3200
+Progress  : batches 300/1000
+Attempted : 38400/128000
+Success   : 38400
 Discarded : 0
 =========================================
 
-[checkpoint] batches 25/100 attempted=3200/12800 success=3200 discarded=0
+[checkpoint] batches 300/1000 attempted=38400/128000 success=38400 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 26/100
-Attempted : 3328/12800
-Success   : 3328
+Progress  : batches 310/1000
+Attempted : 39680/128000
+Success   : 39680
 Discarded : 0
 =========================================
 
-[checkpoint] batches 26/100 attempted=3328/12800 success=3328 discarded=0
+[checkpoint] batches 310/1000 attempted=39680/128000 success=39680 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 27/100
-Attempted : 3456/12800
-Success   : 3456
+Progress  : batches 320/1000
+Attempted : 40960/128000
+Success   : 40960
 Discarded : 0
 =========================================
 
-[checkpoint] batches 27/100 attempted=3456/12800 success=3456 discarded=0
+[checkpoint] batches 320/1000 attempted=40960/128000 success=40960 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 29/100
-Attempted : 3712/12800
-Success   : 3712
+Progress  : batches 330/1000
+Attempted : 42240/128000
+Success   : 42240
 Discarded : 0
 =========================================
 
-[checkpoint] batches 29/100 attempted=3712/12800 success=3712 discarded=0
+[checkpoint] batches 330/1000 attempted=42240/128000 success=42240 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 30/100
-Attempted : 3840/12800
-Success   : 3840
+Progress  : batches 340/1000
+Attempted : 43520/128000
+Success   : 43520
 Discarded : 0
 =========================================
 
-[checkpoint] batches 30/100 attempted=3840/12800 success=3840 discarded=0
+[checkpoint] batches 340/1000 attempted=43520/128000 success=43520 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 31/100
-Attempted : 3968/12800
-Success   : 3968
+Progress  : batches 351/1000
+Attempted : 44928/128000
+Success   : 44928
 Discarded : 0
 =========================================
 
-[checkpoint] batches 31/100 attempted=3968/12800 success=3968 discarded=0
+[checkpoint] batches 351/1000 attempted=44928/128000 success=44928 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 32/100
-Attempted : 4096/12800
-Success   : 4096
+Progress  : batches 361/1000
+Attempted : 46208/128000
+Success   : 46208
 Discarded : 0
 =========================================
 
-[checkpoint] batches 32/100 attempted=4096/12800 success=4096 discarded=0
+[checkpoint] batches 361/1000 attempted=46208/128000 success=46208 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 33/100
-Attempted : 4224/12800
-Success   : 4224
+Progress  : batches 370/1000
+Attempted : 47360/128000
+Success   : 47360
 Discarded : 0
 =========================================
 
-[checkpoint] batches 33/100 attempted=4224/12800 success=4224 discarded=0
+[checkpoint] batches 370/1000 attempted=47360/128000 success=47360 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 34/100
-Attempted : 4352/12800
-Success   : 4352
+Progress  : batches 380/1000
+Attempted : 48640/128000
+Success   : 48640
 Discarded : 0
 =========================================
 
-[checkpoint] batches 34/100 attempted=4352/12800 success=4352 discarded=0
+[checkpoint] batches 380/1000 attempted=48640/128000 success=48640 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 35/100
-Attempted : 4480/12800
-Success   : 4480
+Progress  : batches 390/1000
+Attempted : 49920/128000
+Success   : 49920
 Discarded : 0
 =========================================
 
-[checkpoint] batches 35/100 attempted=4480/12800 success=4480 discarded=0
+[checkpoint] batches 390/1000 attempted=49920/128000 success=49920 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 37/100
-Attempted : 4736/12800
-Success   : 4736
+Progress  : batches 400/1000
+Attempted : 51200/128000
+Success   : 51200
 Discarded : 0
 =========================================
 
-[checkpoint] batches 37/100 attempted=4736/12800 success=4736 discarded=0
+[checkpoint] batches 400/1000 attempted=51200/128000 success=51200 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 38/100
-Attempted : 4864/12800
-Success   : 4864
+Progress  : batches 411/1000
+Attempted : 52608/128000
+Success   : 52608
 Discarded : 0
 =========================================
 
-[checkpoint] batches 38/100 attempted=4864/12800 success=4864 discarded=0
+[checkpoint] batches 411/1000 attempted=52608/128000 success=52608 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 39/100
-Attempted : 4992/12800
-Success   : 4992
+Progress  : batches 421/1000
+Attempted : 53888/128000
+Success   : 53888
 Discarded : 0
 =========================================
 
-[checkpoint] batches 39/100 attempted=4992/12800 success=4992 discarded=0
+[checkpoint] batches 421/1000 attempted=53888/128000 success=53888 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 40/100
-Attempted : 5120/12800
-Success   : 5120
+Progress  : batches 430/1000
+Attempted : 55040/128000
+Success   : 55040
 Discarded : 0
 =========================================
 
-[checkpoint] batches 40/100 attempted=5120/12800 success=5120 discarded=0
+[checkpoint] batches 430/1000 attempted=55040/128000 success=55040 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 41/100
-Attempted : 5248/12800
-Success   : 5248
+Progress  : batches 440/1000
+Attempted : 56320/128000
+Success   : 56320
 Discarded : 0
 =========================================
 
-[checkpoint] batches 41/100 attempted=5248/12800 success=5248 discarded=0
+[checkpoint] batches 440/1000 attempted=56320/128000 success=56320 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 43/100
-Attempted : 5504/12800
-Success   : 5504
+Progress  : batches 450/1000
+Attempted : 57600/128000
+Success   : 57600
 Discarded : 0
 =========================================
 
-[checkpoint] batches 43/100 attempted=5504/12800 success=5504 discarded=0
+[checkpoint] batches 450/1000 attempted=57600/128000 success=57600 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 44/100
-Attempted : 5632/12800
-Success   : 5632
+Progress  : batches 460/1000
+Attempted : 58880/128000
+Success   : 58880
 Discarded : 0
 =========================================
 
-[checkpoint] batches 44/100 attempted=5632/12800 success=5632 discarded=0
+[checkpoint] batches 460/1000 attempted=58880/128000 success=58880 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 45/100
-Attempted : 5760/12800
-Success   : 5760
+Progress  : batches 471/1000
+Attempted : 60288/128000
+Success   : 60288
 Discarded : 0
 =========================================
 
-[checkpoint] batches 45/100 attempted=5760/12800 success=5760 discarded=0
+[checkpoint] batches 471/1000 attempted=60288/128000 success=60288 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 46/100
-Attempted : 5888/12800
-Success   : 5888
+Progress  : batches 481/1000
+Attempted : 61568/128000
+Success   : 61568
 Discarded : 0
 =========================================
 
-[checkpoint] batches 46/100 attempted=5888/12800 success=5888 discarded=0
+[checkpoint] batches 481/1000 attempted=61568/128000 success=61568 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 47/100
-Attempted : 6016/12800
-Success   : 6016
+Progress  : batches 490/1000
+Attempted : 62720/128000
+Success   : 62720
 Discarded : 0
 =========================================
 
-[checkpoint] batches 47/100 attempted=6016/12800 success=6016 discarded=0
+[checkpoint] batches 490/1000 attempted=62720/128000 success=62720 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 49/100
-Attempted : 6272/12800
-Success   : 6272
+Progress  : batches 500/1000
+Attempted : 64000/128000
+Success   : 64000
 Discarded : 0
 =========================================
 
-[checkpoint] batches 49/100 attempted=6272/12800 success=6272 discarded=0
+[checkpoint] batches 500/1000 attempted=64000/128000 success=64000 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 50/100
-Attempted : 6400/12800
-Success   : 6400
+Progress  : batches 510/1000
+Attempted : 65280/128000
+Success   : 65280
 Discarded : 0
 =========================================
 
-[checkpoint] batches 50/100 attempted=6400/12800 success=6400 discarded=0
+[checkpoint] batches 510/1000 attempted=65280/128000 success=65280 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 51/100
-Attempted : 6528/12800
-Success   : 6528
+Progress  : batches 520/1000
+Attempted : 66560/128000
+Success   : 66560
 Discarded : 0
 =========================================
 
-[checkpoint] batches 51/100 attempted=6528/12800 success=6528 discarded=0
+[checkpoint] batches 520/1000 attempted=66560/128000 success=66560 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 52/100
-Attempted : 6656/12800
-Success   : 6656
+Progress  : batches 530/1000
+Attempted : 67840/128000
+Success   : 67840
 Discarded : 0
 =========================================
 
-[checkpoint] batches 52/100 attempted=6656/12800 success=6656 discarded=0
+[checkpoint] batches 530/1000 attempted=67840/128000 success=67840 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 53/100
-Attempted : 6784/12800
-Success   : 6784
+Progress  : batches 540/1000
+Attempted : 69120/128000
+Success   : 69120
 Discarded : 0
 =========================================
 
-[checkpoint] batches 53/100 attempted=6784/12800 success=6784 discarded=0
+[checkpoint] batches 540/1000 attempted=69120/128000 success=69120 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 54/100
-Attempted : 6912/12800
-Success   : 6912
+Progress  : batches 550/1000
+Attempted : 70400/128000
+Success   : 70400
 Discarded : 0
 =========================================
 
-[checkpoint] batches 54/100 attempted=6912/12800 success=6912 discarded=0
+[checkpoint] batches 550/1000 attempted=70400/128000 success=70400 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 56/100
-Attempted : 7168/12800
-Success   : 7168
+Progress  : batches 560/1000
+Attempted : 71680/128000
+Success   : 71680
 Discarded : 0
 =========================================
 
-[checkpoint] batches 56/100 attempted=7168/12800 success=7168 discarded=0
+[checkpoint] batches 560/1000 attempted=71680/128000 success=71680 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 57/100
-Attempted : 7296/12800
-Success   : 7296
+Progress  : batches 571/1000
+Attempted : 73088/128000
+Success   : 73088
 Discarded : 0
 =========================================
 
-[checkpoint] batches 57/100 attempted=7296/12800 success=7296 discarded=0
+[checkpoint] batches 571/1000 attempted=73088/128000 success=73088 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 58/100
-Attempted : 7424/12800
-Success   : 7424
+Progress  : batches 581/1000
+Attempted : 74368/128000
+Success   : 74368
 Discarded : 0
 =========================================
 
-[checkpoint] batches 58/100 attempted=7424/12800 success=7424 discarded=0
+[checkpoint] batches 581/1000 attempted=74368/128000 success=74368 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 59/100
-Attempted : 7552/12800
-Success   : 7552
+Progress  : batches 590/1000
+Attempted : 75520/128000
+Success   : 75520
 Discarded : 0
 =========================================
 
-[checkpoint] batches 59/100 attempted=7552/12800 success=7552 discarded=0
+[checkpoint] batches 590/1000 attempted=75520/128000 success=75520 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 60/100
-Attempted : 7680/12800
-Success   : 7680
+Progress  : batches 600/1000
+Attempted : 76800/128000
+Success   : 76800
 Discarded : 0
 =========================================
 
-[checkpoint] batches 60/100 attempted=7680/12800 success=7680 discarded=0
+[checkpoint] batches 600/1000 attempted=76800/128000 success=76800 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 61/100
-Attempted : 7808/12800
-Success   : 7808
+Progress  : batches 610/1000
+Attempted : 78080/128000
+Success   : 78080
 Discarded : 0
 =========================================
 
-[checkpoint] batches 61/100 attempted=7808/12800 success=7808 discarded=0
+[checkpoint] batches 610/1000 attempted=78080/128000 success=78080 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 62/100
-Attempted : 7936/12800
-Success   : 7936
+Progress  : batches 620/1000
+Attempted : 79360/128000
+Success   : 79360
 Discarded : 0
 =========================================
 
-[checkpoint] batches 62/100 attempted=7936/12800 success=7936 discarded=0
+[checkpoint] batches 620/1000 attempted=79360/128000 success=79360 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 63/100
-Attempted : 8064/12800
-Success   : 8064
+Progress  : batches 630/1000
+Attempted : 80640/128000
+Success   : 80640
 Discarded : 0
 =========================================
 
-[checkpoint] batches 63/100 attempted=8064/12800 success=8064 discarded=0
+[checkpoint] batches 630/1000 attempted=80640/128000 success=80640 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 64/100
-Attempted : 8192/12800
-Success   : 8192
+Progress  : batches 640/1000
+Attempted : 81920/128000
+Success   : 81920
 Discarded : 0
 =========================================
 
-[checkpoint] batches 64/100 attempted=8192/12800 success=8192 discarded=0
+[checkpoint] batches 640/1000 attempted=81920/128000 success=81920 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 65/100
-Attempted : 8320/12800
-Success   : 8320
+Progress  : batches 650/1000
+Attempted : 83200/128000
+Success   : 83200
 Discarded : 0
 =========================================
 
-[checkpoint] batches 65/100 attempted=8320/12800 success=8320 discarded=0
+[checkpoint] batches 650/1000 attempted=83200/128000 success=83200 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 66/100
-Attempted : 8448/12800
-Success   : 8448
+Progress  : batches 660/1000
+Attempted : 84480/128000
+Success   : 84480
 Discarded : 0
 =========================================
 
-[checkpoint] batches 66/100 attempted=8448/12800 success=8448 discarded=0
+[checkpoint] batches 660/1000 attempted=84480/128000 success=84480 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 67/100
-Attempted : 8576/12800
-Success   : 8576
+Progress  : batches 670/1000
+Attempted : 85760/128000
+Success   : 85760
 Discarded : 0
 =========================================
 
-[checkpoint] batches 67/100 attempted=8576/12800 success=8576 discarded=0
+[checkpoint] batches 670/1000 attempted=85760/128000 success=85760 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 68/100
-Attempted : 8704/12800
-Success   : 8704
+Progress  : batches 680/1000
+Attempted : 87040/128000
+Success   : 87040
 Discarded : 0
 =========================================
 
-[checkpoint] batches 68/100 attempted=8704/12800 success=8704 discarded=0
+[checkpoint] batches 680/1000 attempted=87040/128000 success=87040 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 69/100
-Attempted : 8832/12800
-Success   : 8832
+Progress  : batches 691/1000
+Attempted : 88448/128000
+Success   : 88448
 Discarded : 0
 =========================================
 
-[checkpoint] batches 69/100 attempted=8832/12800 success=8832 discarded=0
+[checkpoint] batches 691/1000 attempted=88448/128000 success=88448 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 70/100
-Attempted : 8960/12800
-Success   : 8960
+Progress  : batches 701/1000
+Attempted : 89728/128000
+Success   : 89728
 Discarded : 0
 =========================================
 
-[checkpoint] batches 70/100 attempted=8960/12800 success=8960 discarded=0
+[checkpoint] batches 701/1000 attempted=89728/128000 success=89728 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 72/100
-Attempted : 9216/12800
-Success   : 9216
+Progress  : batches 711/1000
+Attempted : 91008/128000
+Success   : 91008
 Discarded : 0
 =========================================
 
-[checkpoint] batches 72/100 attempted=9216/12800 success=9216 discarded=0
+[checkpoint] batches 711/1000 attempted=91008/128000 success=91008 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 73/100
-Attempted : 9344/12800
-Success   : 9344
+Progress  : batches 720/1000
+Attempted : 92160/128000
+Success   : 92160
 Discarded : 0
 =========================================
 
-[checkpoint] batches 73/100 attempted=9344/12800 success=9344 discarded=0
+[checkpoint] batches 720/1000 attempted=92160/128000 success=92160 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 74/100
-Attempted : 9472/12800
-Success   : 9472
+Progress  : batches 730/1000
+Attempted : 93440/128000
+Success   : 93440
 Discarded : 0
 =========================================
 
-[checkpoint] batches 74/100 attempted=9472/12800 success=9472 discarded=0
+[checkpoint] batches 730/1000 attempted=93440/128000 success=93440 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 75/100
-Attempted : 9600/12800
-Success   : 9600
+Progress  : batches 740/1000
+Attempted : 94720/128000
+Success   : 94720
 Discarded : 0
 =========================================
 
-[checkpoint] batches 75/100 attempted=9600/12800 success=9600 discarded=0
+[checkpoint] batches 740/1000 attempted=94720/128000 success=94720 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 76/100
-Attempted : 9728/12800
-Success   : 9728
+Progress  : batches 750/1000
+Attempted : 96000/128000
+Success   : 96000
 Discarded : 0
 =========================================
 
-[checkpoint] batches 76/100 attempted=9728/12800 success=9728 discarded=0
+[checkpoint] batches 750/1000 attempted=96000/128000 success=96000 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 77/100
-Attempted : 9856/12800
-Success   : 9856
+Progress  : batches 760/1000
+Attempted : 97280/128000
+Success   : 97280
 Discarded : 0
 =========================================
 
-[checkpoint] batches 77/100 attempted=9856/12800 success=9856 discarded=0
+[checkpoint] batches 760/1000 attempted=97280/128000 success=97280 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 78/100
-Attempted : 9984/12800
-Success   : 9984
+Progress  : batches 770/1000
+Attempted : 98560/128000
+Success   : 98560
 Discarded : 0
 =========================================
 
-[checkpoint] batches 78/100 attempted=9984/12800 success=9984 discarded=0
+[checkpoint] batches 770/1000 attempted=98560/128000 success=98560 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 79/100
-Attempted : 10112/12800
-Success   : 10112
+Progress  : batches 780/1000
+Attempted : 99840/128000
+Success   : 99840
 Discarded : 0
 =========================================
 
-[checkpoint] batches 79/100 attempted=10112/12800 success=10112 discarded=0
+[checkpoint] batches 780/1000 attempted=99840/128000 success=99840 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 80/100
-Attempted : 10240/12800
-Success   : 10240
+Progress  : batches 790/1000
+Attempted : 101120/128000
+Success   : 101120
 Discarded : 0
 =========================================
 
-[checkpoint] batches 80/100 attempted=10240/12800 success=10240 discarded=0
+[checkpoint] batches 790/1000 attempted=101120/128000 success=101120 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 81/100
-Attempted : 10368/12800
-Success   : 10368
+Progress  : batches 800/1000
+Attempted : 102400/128000
+Success   : 102400
 Discarded : 0
 =========================================
 
-[checkpoint] batches 81/100 attempted=10368/12800 success=10368 discarded=0
+[checkpoint] batches 800/1000 attempted=102400/128000 success=102400 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 82/100
-Attempted : 10496/12800
-Success   : 10496
+Progress  : batches 810/1000
+Attempted : 103680/128000
+Success   : 103680
 Discarded : 0
 =========================================
 
-[checkpoint] batches 82/100 attempted=10496/12800 success=10496 discarded=0
+[checkpoint] batches 810/1000 attempted=103680/128000 success=103680 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 83/100
-Attempted : 10624/12800
-Success   : 10624
+Progress  : batches 821/1000
+Attempted : 105088/128000
+Success   : 105088
 Discarded : 0
 =========================================
 
-[checkpoint] batches 83/100 attempted=10624/12800 success=10624 discarded=0
+[checkpoint] batches 821/1000 attempted=105088/128000 success=105088 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 85/100
-Attempted : 10880/12800
-Success   : 10880
+Progress  : batches 831/1000
+Attempted : 106368/128000
+Success   : 106368
 Discarded : 0
 =========================================
 
-[checkpoint] batches 85/100 attempted=10880/12800 success=10880 discarded=0
+[checkpoint] batches 831/1000 attempted=106368/128000 success=106368 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 86/100
-Attempted : 11008/12800
-Success   : 11008
+Progress  : batches 841/1000
+Attempted : 107648/128000
+Success   : 107648
 Discarded : 0
 =========================================
 
-[checkpoint] batches 86/100 attempted=11008/12800 success=11008 discarded=0
+[checkpoint] batches 841/1000 attempted=107648/128000 success=107648 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 87/100
-Attempted : 11136/12800
-Success   : 11136
+Progress  : batches 850/1000
+Attempted : 108800/128000
+Success   : 108800
 Discarded : 0
 =========================================
 
-[checkpoint] batches 87/100 attempted=11136/12800 success=11136 discarded=0
+[checkpoint] batches 850/1000 attempted=108800/128000 success=108800 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 88/100
-Attempted : 11264/12800
-Success   : 11264
+Progress  : batches 860/1000
+Attempted : 110080/128000
+Success   : 110080
 Discarded : 0
 =========================================
 
-[checkpoint] batches 88/100 attempted=11264/12800 success=11264 discarded=0
+[checkpoint] batches 860/1000 attempted=110080/128000 success=110080 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 89/100
-Attempted : 11392/12800
-Success   : 11392
+Progress  : batches 870/1000
+Attempted : 111360/128000
+Success   : 111360
 Discarded : 0
 =========================================
 
-[checkpoint] batches 89/100 attempted=11392/12800 success=11392 discarded=0
+[checkpoint] batches 870/1000 attempted=111360/128000 success=111360 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 90/100
-Attempted : 11520/12800
-Success   : 11520
+Progress  : batches 880/1000
+Attempted : 112640/128000
+Success   : 112640
 Discarded : 0
 =========================================
 
-[checkpoint] batches 90/100 attempted=11520/12800 success=11520 discarded=0
+[checkpoint] batches 880/1000 attempted=112640/128000 success=112640 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 91/100
-Attempted : 11648/12800
-Success   : 11648
+Progress  : batches 890/1000
+Attempted : 113920/128000
+Success   : 113920
 Discarded : 0
 =========================================
 
-[checkpoint] batches 91/100 attempted=11648/12800 success=11648 discarded=0
+[checkpoint] batches 890/1000 attempted=113920/128000 success=113920 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 92/100
-Attempted : 11776/12800
-Success   : 11776
+Progress  : batches 900/1000
+Attempted : 115200/128000
+Success   : 115200
 Discarded : 0
 =========================================
 
-[checkpoint] batches 92/100 attempted=11776/12800 success=11776 discarded=0
+[checkpoint] batches 900/1000 attempted=115200/128000 success=115200 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 93/100
-Attempted : 11904/12800
-Success   : 11904
+Progress  : batches 910/1000
+Attempted : 116480/128000
+Success   : 116480
 Discarded : 0
 =========================================
 
-[checkpoint] batches 93/100 attempted=11904/12800 success=11904 discarded=0
+[checkpoint] batches 910/1000 attempted=116480/128000 success=116480 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 94/100
-Attempted : 12032/12800
-Success   : 12032
+Progress  : batches 920/1000
+Attempted : 117760/128000
+Success   : 117760
 Discarded : 0
 =========================================
 
-[checkpoint] batches 94/100 attempted=12032/12800 success=12032 discarded=0
+[checkpoint] batches 920/1000 attempted=117760/128000 success=117760 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 95/100
-Attempted : 12160/12800
-Success   : 12160
+Progress  : batches 930/1000
+Attempted : 119040/128000
+Success   : 119040
 Discarded : 0
 =========================================
 
-[checkpoint] batches 95/100 attempted=12160/12800 success=12160 discarded=0
+[checkpoint] batches 930/1000 attempted=119040/128000 success=119040 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 97/100
-Attempted : 12416/12800
-Success   : 12416
+Progress  : batches 941/1000
+Attempted : 120448/128000
+Success   : 120448
 Discarded : 0
 =========================================
 
-[checkpoint] batches 97/100 attempted=12416/12800 success=12416 discarded=0
+[checkpoint] batches 941/1000 attempted=120448/128000 success=120448 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 98/100
-Attempted : 12544/12800
-Success   : 12544
+Progress  : batches 951/1000
+Attempted : 121728/128000
+Success   : 121728
 Discarded : 0
 =========================================
 
-[checkpoint] batches 98/100 attempted=12544/12800 success=12544 discarded=0
+[checkpoint] batches 951/1000 attempted=121728/128000 success=121728 discarded=0
 
 ============= Checkpoint saved ==========
 File      : test_real_ckpt.npz
-Progress  : batches 99/100
-Attempted : 12672/12800
-Success   : 12672
+Progress  : batches 961/1000
+Attempted : 123008/128000
+Success   : 123008
 Discarded : 0
 =========================================
 
-[checkpoint] batches 99/100 attempted=12672/12800 success=12672 discarded=0
+[checkpoint] batches 961/1000 attempted=123008/128000 success=123008 discarded=0
+
+============= Checkpoint saved ==========
+File      : test_real_ckpt.npz
+Progress  : batches 970/1000
+Attempted : 124160/128000
+Success   : 124160
+Discarded : 0
+=========================================
+
+[checkpoint] batches 970/1000 attempted=124160/128000 success=124160 discarded=0
+
+============= Checkpoint saved ==========
+File      : test_real_ckpt.npz
+Progress  : batches 980/1000
+Attempted : 125440/128000
+Success   : 125440
+Discarded : 0
+=========================================
+
+[checkpoint] batches 980/1000 attempted=125440/128000 success=125440 discarded=0
+
+============= Checkpoint saved ==========
+File      : test_real_ckpt.npz
+Progress  : batches 990/1000
+Attempted : 126720/128000
+Success   : 126720
+Discarded : 0
+=========================================
+
+[checkpoint] batches 990/1000 attempted=126720/128000 success=126720 discarded=0
 
 ================ Timing ================
 MPI ranks             : 1
-Total wall time (max) : 0:03:14.137
-Loop wall time  (max) : 0:03:14.032
-Fortran time   (max)  : 0:03:11.609  (98.8% of loop)
-Requested trajectories: 12800
-Target effective traj : 12800  (npar=128)
+Total wall time (max) : 0:29:04.536
+Loop wall time  (max) : 0:29:04.365
+Fortran time   (max)  : 0:28:45.553  (98.9% of loop)
+Requested trajectories: 128000
+Target effective traj : 128000  (npar=128)
 ========================================
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH -J mash-real-test 
 #SBATCH --qos=debug
-#SBATCH --time=00:30:0
+#SBATCH --time=00:30:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=128
@@ -24,7 +24,7 @@ module load python
 module load conda
 conda activate mash
 
-python mash.py @tc_ext.in -ckpt -ckptfile test_real_ckpt.npz -ckptfrac 0.01 >  run.dat
+python -u mash.py @tc_ext.in -restart -ckpt -ckptfile test_real_ckpt.npz -ckptfrac 0.01 >  run.dat
 
 cp run.dat pop.out "$HomeDir/"
 

@@ -11,7 +11,7 @@
 -nucsamp classical
 #
 # Convergence
--ntraj 12800
+-ntraj 128000
 #Number of time steps per trajectory in au, au = fs * 41.34136
 -nt    500
 #Time step size in au, au = fs * 41.34136

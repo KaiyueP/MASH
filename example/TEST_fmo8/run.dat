@@ -1,0 +1,48 @@
+Input arguments:
+Model:  fmo8
+Units:  cmm1
+Observable type:  pop
+Initial state:  0
+Initial basis:  site
+Temperature:  300.0
+Reciprocal temperature:  1.0
+Number of bath modes:  100
+Number of time steps:  6000
+Time step:  0.5
+Number of trajectories:  12800
+Number of parallel processors:  128
+Diabatic coupling:  1.0
+Energy bias:  0.0
+Reorganization energy:  0
+Cutoff frequency:  0.0
+Disorder:  none
+Bath:  B777
+Polaron transformation:  vpt
+Wavepacket energy:  0.0
+Wavepacket width:  0.0
+Initial momentum:  0.0
+Nuclear sampling:  cl
+Electronic sampling:  focused
+Debug:  False
+Ead computation:  False
+Seed:  None
+38.46062351214871
+44.33099999999999
+0 0.11289528983656687
+1 0.002855036755436682
+2 6.283866222766116e-05
+3 1.376603104529111e-06
+4 3.0112166660069163e-08
+Resulting band narrow factors:
+bandnarrow avg 0.943248387176226
+bandnarrow min 0.9363296246706759
+
+================ Timing ================
+MPI ranks             : 1
+Total wall time (max) : 0:22:59.371
+Loop wall time  (max) : 0:22:59.227
+Fortran time   (max)  : 0:22:57.830  (99.9% of loop)
+Requested trajectories: 12800
+Target effective traj : 12800  (npar=128)
+========================================
+
